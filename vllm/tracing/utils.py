@@ -26,6 +26,7 @@ class SpanAttributes:
     GEN_AI_REQUEST_MAX_TOKENS = "gen_ai.request.max_tokens"
     GEN_AI_REQUEST_TOP_P = "gen_ai.request.top_p"
     GEN_AI_REQUEST_TEMPERATURE = "gen_ai.request.temperature"
+    GEN_AI_REQUEST_MODEL = "gen_ai.request.model"
     GEN_AI_RESPONSE_MODEL = "gen_ai.response.model"
 
     # Custom attributes added until they are standardized

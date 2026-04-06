@@ -420,6 +420,7 @@ class OutputProcessor:
         log_stats: bool,
         stream_interval: int = 1,
         tracing_enabled: bool = False,
+        model_name: str | None = None,
     ):
         self.log_stats = log_stats
         self.tokenizer = tokenizer
@@ -429,6 +430,7 @@ class OutputProcessor:
         self.external_req_ids: defaultdict[str, list[str]] = defaultdict(list)
         self.lora_states = LoRARequestStates(log_stats)
         self.tracing_enabled = tracing_enabled
+        self.model_name = model_name
 
     def get_num_unfinished_requests(self):
         return len(self.request_states)
@@ -737,6 +739,8 @@ class OutputProcessor:
             SpanAttributes.GEN_AI_LATENCY_TIME_IN_MODEL_INFERENCE: inference_time,
             SpanAttributes.GEN_AI_REQUEST_ID: req_state.external_req_id,
         }
+        if self.model_name:
+            attributes[SpanAttributes.GEN_AI_REQUEST_MODEL] = self.model_name
 
         # Add optional request parameters
         if req_state.top_p:

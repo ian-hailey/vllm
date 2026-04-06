@@ -105,6 +105,7 @@ class LLMEngine:
             log_stats=self.log_stats,
             stream_interval=self.vllm_config.scheduler_config.stream_interval,
             tracing_enabled=tracing_endpoint is not None,
+            model_name=self.model_config.served_model_name or self.model_config.model,
         )
 
         # EngineCore (gets EngineCoreRequests and gives EngineCoreOutputs)
